@@ -1,11 +1,12 @@
 '''
-File Name:huffman.py
+File Name: huffman.py
 Author: Tanveer Gill
 '''
 
-
 import doctest, time
-
+from ADTs.stack import Stack
+from ADTs.p_queue import PriorityQueue
+from ADTs.queue import Queue
 from nodes import HuffmanNode, ReadNode
 
 
@@ -46,224 +47,6 @@ def bits_to_byte(bits):
   """
   return sum([int(bits[pos]) * (1 << (7 - pos))
               for pos in range(len(bits))])
-
-
-# ===============================
-# Abstract Data type(ADT) classes
-
-
-class PriorityQueue:
-  """
-  A container ADT that remove objects according
-  to their priority.
-
-  All the items put in this queue should be be tuples of object
-  HuffmanNode and int. Tuple with the smallest int value will be
-  prioritized and removed. The ties will be dealt in First In
-  First Our Order(FIFO).
-
-  This ADT is used to build Tree of HuffmanNode's in function
-  huffman_tree
-  """
-  def __init__(self):
-    """(PriorityQueue) -> None
-    Initialize a queue with zero items
-    """
-    self._queue = []
-
-  def enqueue(self, obj):
-    """(PriorityQueue, tuple(HuffmanNode, int)) -> None
-    Add obj to this PriorityQueue
-
-    >>> pq = PriorityQueue()
-    >>> pq.is_empty()
-    True
-    >>> pq.enqueue((HuffmanNode(2, None, None), 6))
-    >>> pq.enqueue((HuffmanNode(3, None, None), 4))
-    >>> pq.is_empty()
-    False
-    """
-    self._queue.append(obj)
-
-  def dequeue(self):
-    """(PriorityQueue) -> tuple
-    Remove and return the object with most priority
-
-    >>> pq = PriorityQueue()
-    >>> pq.enqueue((HuffmanNode(2, None, None), 6))
-    >>> pq.enqueue((HuffmanNode(3, None, None), 4))
-    >>> pq.dequeue()
-    (HuffmanNode(3, None, None), 4)
-    >>> pq.is_empty()
-    False
-    >>> pq.dequeue()
-    (HuffmanNode(2, None, None), 6)
-    >>> pq.is_empty()
-    True
-    """
-    # Add the int from second index of each tuple
-    all_freq = []
-    for item in self._queue:
-      all_freq.append(item[1])
-
-    # Returns the tuple with minimum second index value
-    for item in self._queue:
-      if item[1] == min(all_freq):
-        self._queue.remove(item)
-        return item
-
-  def is_empty(self):
-    """(PriorityQueue) -> bool
-    Return True iff no more objects are left in
-    this Priority Queue.
-
-    >>> pq = PriorityQueue()
-    >>> pq.is_empty()
-    True
-    >>> pq.enqueue((HuffmanNode(2, None, None), 6))
-    >>> pq.is_empty()
-    False
-    """
-    return len(self._queue) == 0
-
-
-class Stack:
-  """
-  A Container ADT with Last In First Out(LIFO) property.
-
-  This ADT is used to construct a tree of HuffmanNode's form
-  ReadNodes in function generate_tree_postorder.
-  """
-  def __init__(self):
-    """(Stack) -> None
-    Initialize an empty stack
-    """
-    self._stack = []
-
-  def add(self, obj):
-    """(Stack, object) -> None
-    Add obj to this Stack
-
-    >>> s = Stack()
-    >>> s.is_empty()
-    True
-    >>> s.add(HuffmanNode(5))
-    >>> s.is_empty()
-    False
-    >>> s.add(HuffmanNode(7))
-    >>> s.is_empty()
-    False
-    >>> s.pop()
-    HuffmanNode(7, None, None)
-    >>> s.is_empty()
-    False
-    >>> s.pop()
-    HuffmanNode(5, None, None)
-    >>> s.is_empty()
-    True
-    """
-    self._stack.append(obj)
-
-  def pop(self):
-    """(Stack) -> object
-    Remove and return the top most object in this stack
-    Add obj to this Stack
-
-    >>> s = Stack()
-    >>> s.is_empty()
-    True
-    >>> s.add(HuffmanNode(5))
-    >>> s.add(HuffmanNode(7))
-    >>> s.pop()
-    HuffmanNode(7, None, None)
-    >>> s.is_empty()
-    False
-    >>> s.pop()
-    HuffmanNode(5, None, None)
-    >>> s.is_empty()
-    True
-    """
-    return self._stack.pop()
-
-  def is_empty(self):
-    """(Stack) -> object
-    Return True iff no more objects are left in this stack
-
-    >>> s = Stack()
-    >>> s.is_empty()
-    True
-    >>> s.add(HuffmanNode(5))
-    >>> s.is_empty()
-    False
-    """
-    return len(self._stack) == 0
-
-
-class Queue:
-  """
-  A Container ADT with First In First Out(FIFO) property.
-
-  The ADT is used to visit the tree of HuffmanNode's in
-  level order in function improve_tree.
-  """
-  def __init__(self):
-    """(Queue) -> None
-
-    Initialize an empty Queue
-    """
-    self._queue = []
-
-  def enqueue(self, obj):
-    """(Queue, object) -> None
-    Add an object to this Queue
-
-    >>> q = Queue()
-    >>> q.is_empty()
-    True
-    >>> q.enqueue(HuffmanNode(5))
-    >>> q.enqueue(HuffmanNode(5))
-    >>> q.is_empty()
-    False
-    """
-    self._queue.append(obj)
-
-  def dequeue(self):
-    """(Queue) -> object
-    Remove and return the bottom most object in this Queue
-
-    >>> q = Queue()
-    >>> q.is_empty()
-    True
-    >>> q.enqueue(HuffmanNode(5))
-    >>> q.is_empty()
-    False
-    >>> q.enqueue(HuffmanNode(7))
-    >>> q.is_empty()
-    False
-    >>> q.dequeue()
-    HuffmanNode(5, None, None)
-    >>> q.is_empty()
-    False
-    >>> q.dequeue()
-    HuffmanNode(7, None, None)
-    >>> q.is_empty()
-    True
-    """
-    return self._queue.pop(0)
-
-  def is_empty(self):
-    """(Queue) -> bool
-    Return True iff no more objects are left in this Queue
-
-    >>> q = Queue()
-    >>> q.is_empty()
-    True
-    >>> q.enqueue(HuffmanNode(5))
-    >>> q.enqueue(HuffmanNode(5))
-    >>> q.is_empty()
-    False
-    """
-    return len(self._queue) == 0
 
 
 # =========================
@@ -780,16 +563,5 @@ def improve_tree(tree, freq_dict):
       queue.enqueue(node.right)
 
 if __name__ == "__main__":
+  import doctest
   doctest.testmod()
-
-  mode = input("Press c to compress or u to uncompress: ")
-  if mode == "c":
-    fname = input("File to compress: ")
-    start = time.time()
-    compress(fname, fname + ".huf")
-    print("compressed {} in {} seconds.".format(fname, time.time() - start))
-  elif mode == "u":
-    fname = input("File to uncompress: ")
-    start = time.time()
-    uncompress(fname, fname + ".orig")
-    print("uncompressed {} in {} seconds.".format(fname, time.time() - start))
