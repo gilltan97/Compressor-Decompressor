@@ -4,7 +4,7 @@ It compresses the file into another file with .huf extension and decompresses
 that .huf file back into its original state. 
 
 ##Requirement
-Markup : * python3
+* Bullet list
 
 ##Usage
 ```
