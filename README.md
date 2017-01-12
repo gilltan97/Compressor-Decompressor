@@ -4,10 +4,10 @@ It compresses the file into another file with .huf extension and decompresses
 that .huf file back into its original state. 
 
 ##Requirement
-* Bullet list
+* pyhton3
 
 ##Usage
-```
+```bash
 # Compressing a file 
 python3 Main.py
 Press c to compress or u to uncompress: c
