@@ -4,9 +4,7 @@ It compresses the file into another file with .huf extension and decompresses
 that .huf file back into its original state. 
 
 ##Requirement
-```
-* python3 
-```
+Markup : * python3
 
 ##Usage
 ```
