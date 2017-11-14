@@ -16,5 +16,5 @@ File to compress: test-files/[file]
 # Uncompressing a file
 python3 Main.py
 Press c to compress or u to uncompress: u
-File to compress:  test-files/[file].huf
+File to uncompress:  test-files/[file].huf
 ```
