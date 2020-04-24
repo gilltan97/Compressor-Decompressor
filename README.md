@@ -5,9 +5,6 @@ A tool to compress/decompress files of any format.
 It compresses the file and generates a compressed file with ```.huf``` extension and decompresses 
 that ```.huf``` file back into its original state given the commands to compress and decompress. 
 
-## Requirement
-* pyhton3
-
 ## Usage
 ```bash
 # Compressing a file 
