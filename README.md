@@ -8,13 +8,13 @@ that ```.huf``` file back into its original state given the commands to `compres
 ## Usage
 #### Compressing a file
 ```bash
-python3 Main.py
+$ python3 Main.py
 Press c to compress or u to uncompress: c
 File to compress: test-files/[file]
 ```
 #### Decompressing a file
 ```bash 
-python3 Main.py
+$ python3 Main.py
 Press c to compress or u to uncompress: u
 File to uncompress:  test-files/[file].huf
 ```
